@@ -1,0 +1,16 @@
+@startuml context
+
+title Context diagram
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_LANDSCAPE()
+LAYOUT_WITH_LEGEND()
+
+Person(user, "User")
+
+System(tracker, "TaskTracker", "Stores data about tasks")
+
+Rel(user, tracker, "Manages tasks, create comments, put likes")
+
+@enduml

@@ -1,0 +1,58 @@
+@startuml
+
+entity "User" as user {
+  + id : uuid
+  --
+  username: string
+  password: string
+}
+
+entity "Task" as task {
+  + id : uuid
+  --
+  create_ts: timestamp
+  update_ts: timestamp
+  deadline_ts: timestamp
+  author_id: uuid
+  title: string
+  content: string
+  status: StatusEnum
+  executor_id: uuid | null
+}
+
+entity "Comment" as comment {
+  + id: uuid
+  --
+  author_id: uuid
+  text: string
+  task_id: uuid
+
+  comment_id: uuid | null
+}
+
+entity "Like" as like {
+  + id: uuid
+  --
+  user_id: uuid
+  task_id: uuid
+  ts: timestamp
+}
+
+entity "View" as view {
+  + id: uuid
+  --
+  task_id: uuid
+  ts: timestamp
+}
+
+user ||--o{ task
+user ||--o{ like
+
+user ||--o{ comment
+comment ||--o| comment
+task ||--o{ comment
+
+task ||--o{ like
+task ||--o{ view
+
+@enduml
