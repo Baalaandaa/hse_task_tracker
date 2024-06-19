@@ -1,0 +1,38 @@
+version: '2'
+
+networks:
+  gateway:
+    name: gateway
+
+services:
+  gateway_service:
+    ports:
+      - "4001:4001"
+    volumes:
+      - ./config/config.yml:/app/config/config.yml
+    environment:
+      - CONFIG_PATH=/app/config/config.yml
+      - PROD=0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    logging:
+      options:
+        max-size: "1024m"
+    networks:
+      - gateway
+    restart: unless-stopped
+    container_name: gateway_service
+  gateway_postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: gateway
+      POSTGRES_DB: gateway
+      POSTGRES_PASSWORD: gateway
+    volumes:
+      - ./db/postgres/data:/var/lib/postgresql/data
+      - ./initdb.sql:/docker-entrypoint-initdb.d/init.sql
+    container_name: gateway_postgres
+    restart: unless-stopped
