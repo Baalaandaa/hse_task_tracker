@@ -5,6 +5,11 @@ entity "User" as user {
   --
   username: string
   password: string
+  name: string | null
+  surname: string | null
+  birthday: timestamp | null
+  email: string | null
+  phone_number: string | null
 }
 
 entity "Task" as task {
