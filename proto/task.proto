@@ -1,0 +1,56 @@
+syntax = "proto3";
+option go_package = "./task_service";
+package task_service;
+
+message Task {
+  string id = 1;
+  string author_id = 2;
+  string title = 3;
+  string content = 4;
+  int32 status = 5;
+}
+
+message CreateTaskInput {
+  string author_id = 1;
+  string title = 2;
+  string content = 3;
+  int32 status = 4;
+}
+
+message CreateTaskOutput {
+  bool success = 1;
+}
+
+message DeleteTaskInput {
+  string id = 1;
+}
+
+message DeleteTaskOutput {
+  bool success = 1;
+}
+
+message GetTaskByIDInput {
+  string id = 1;
+}
+
+message GetTaskByIDOutput {
+  optional Task task = 1;
+}
+
+message GetTasksInput {
+  int32 limit = 1;
+  int32 offset = 2;
+}
+
+message GetTasksOutput {
+  int32 count = 1;
+  repeated Task tasks = 2;
+}
+
+service TaskService {
+  rpc CreateTask(CreateTaskInput) returns (CreateTaskOutput) {}
+  rpc UpdateTask(Task) returns (Task) {}
+  rpc DeleteTask(DeleteTaskInput) returns (DeleteTaskOutput) {}
+  rpc GetTaskByID(GetTaskByIDInput) returns (GetTaskByIDInput) {}
+  rpc GetTasks(GetTasksInput) returns (GetTasksOutput) {}
+}

@@ -27,7 +27,7 @@ func NewHttpServer(cfg *config.Config) *Server {
 func (s *Server) Init(a *internal.App) {
 	s.fiber = fiber.New(fiber.Config{
 		Immutable: true,
-		AppName:   "gateway",
+		AppName:   "task_service",
 	})
 
 	s.fiber.Use(cors.New(cors.Config{

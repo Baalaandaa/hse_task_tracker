@@ -15,14 +15,10 @@ entity "User" as user {
 entity "Task" as task {
   + id : uuid
   --
-  create_ts: timestamp
-  update_ts: timestamp
-  deadline_ts: timestamp
   author_id: uuid
   title: string
   content: string
-  status: StatusEnum
-  executor_id: uuid | null
+  status: int32
 }
 
 entity "Comment" as comment {

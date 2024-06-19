@@ -1,0 +1,70 @@
+openapi: 3.0.0
+info:
+  title: TaskTracker
+  version: 1.0.0
+servers:
+  - url: http://localhost:4001
+tags:
+  - name: Gateway
+paths:
+  /user/sign_up:
+    post:
+      tags:
+        - Gateway
+      summary: SignUp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                login: test
+                password: test
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user/sign_in:
+    post:
+      tags:
+        - Gateway
+      summary: SignIn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                login: test
+                password: test
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /user/:
+    put:
+      tags:
+        - Gateway
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Kirill
+                surname: Balandin
+      parameters:
+        - name: token
+          in: header
+          schema:
+            type: string
+          example: >-
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjliOWFkOGU3LTc1MTgtNGNkZi1iZDBiLWVkYjFmMmNlY2M3YSJ9.KganQmEjnizHk6faxlvMtcgyOBTuLoqoegpVzbD8dX4
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
